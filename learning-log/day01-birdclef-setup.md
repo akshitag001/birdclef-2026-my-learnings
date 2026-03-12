@@ -55,12 +55,15 @@ First , i will show you the result or leaderboard then we will discuss how i got
    ↓
    
    model prediction
+   
    ↓
    
    compare with true label
+   
    ↓
    
    calculate loss
+   
    ↓
    
    update weights
