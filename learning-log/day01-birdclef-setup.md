@@ -27,10 +27,10 @@ First , i will show you the result or leaderboard then we will discuss how i got
 
 4. Built a PyTorch Dataset
 
- i create a custom dataset class purpose was to load data than convert to spectogram than attach label   
- each training sample contains ( spectogram tensor + special label ) labels were encoded into a 234 length vector. 
- 
- what i learned : MULTI LABEL CLASSIFICATION
+    i create a custom dataset class purpose was to load data than convert to spectogram than attach label   
+    each training sample contains ( spectogram tensor + special label ) labels were encoded into a 234 length vector. 
+    
+    what i learned : MULTI LABEL CLASSIFICATION
 
 5. Create a DataLoader
 
@@ -50,26 +50,27 @@ First , i will show you the result or leaderboard then we will discuss how i got
 
 9. Train the Model
 
- spectrogram
+          spectrogram
+         
+               ↓
+         
+         model prediction
+            
+               ↓
+         
+         compare with true label
+         
+               ↓
+         
+         calculate loss
+         
+               ↓
+         
+         update weights
    
-   ↓
+   i train the model for 3 epochs
    
-   model prediction
-   
-   ↓
-   
-   compare with true label
-   
-   ↓
-   
-   calculate loss
-   
-   ↓
-   
-   update weights
-   
-   i train the model for 3 epochs 
-   <img width="612" height="362" alt="image" src="https://github.com/user-attachments/assets/95a1636a-1d75-41c7-8a9f-834ec8bedded" />
+<img width="612" height="362" alt="image" src="https://github.com/user-attachments/assets/95a1636a-1d75-41c7-8a9f-834ec8bedded" />
 
    than i save the trained Model with its weights: birdclef_resnet18.pth  
    
