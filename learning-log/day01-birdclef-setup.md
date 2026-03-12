@@ -15,15 +15,15 @@ First , i will show you the result or leaderboard then we will discuss how i got
 
 3. Converted Audio ---> Spectogram
    coz, neural network cannot directly understand raw audio , so we converted audio into Mel Spectrograms using Librosa ( yeah the same library we use in ai voice detection project )
-audio wavefrom ----> mel spectogram ---> image like representations
-ex. code
-mel = librosa.feature.melspectrogram(
-    y=audio,
-    sr=32000,
-    n_mels=128
-)
+   audio wavefrom ----> mel spectogram ---> image like representations
+   ex. code
+   mel = librosa.feature.melspectrogram(
+       y=audio,
+       sr=32000,
+       n_mels=128
+   )
 
-Result shape : 128 x 313 ( meaning 128 frequency bands , 313 time frames )
+   Result shape : 128 x 313 ( meaning 128 frequency bands , 313 time frames )
 
 4. Built a PyTorch Dataset
 
@@ -38,31 +38,37 @@ Result shape : 128 x 313 ( meaning 128 frequency bands , 313 time frames )
 
 6. MAIN PART ( BUILT THE NEURAL NETWORK )
 
-we use ResNet18, a convolutional neural network , coz its fast stable baseline , good for image like data
+   we use ResNet18, a convolutional neural network , coz its fast stable baseline , good for image like data
 
-since spectograms are grayscale , we modified the first layer: 
-input channels : 3 -> 1  ( the final layer outputs will be 234 species probabilities )
+   since spectograms are grayscale , we modified the first layer:
+   
+   input channels : 3 -> 1  ( the final layer outputs will be 234 species probabilities )
 
-7. Defined Loss Function
+8. Defined Loss Function
 
-we use BCEWithLogitsLoss , coz it is a multi label classification problem , one audio can contain 2-3 species voice mix.
+   we use BCEWithLogitsLoss , coz it is a multi label classification problem , one audio can contain 2-3 species voice mix.
 
-8. Train the Model
+9. Train the Model
 
  spectrogram
-↓
-model prediction
-↓
-compare with true label
-↓
-calculate loss
-↓
-update weights
+   
+   ↓
+   
+   model prediction
+   ↓
+   
+   compare with true label
+   ↓
+   
+   calculate loss
+   ↓
+   
+   update weights
+   
+   i train the model for 3 epochs 
+   <img width="612" height="362" alt="image" src="https://github.com/user-attachments/assets/95a1636a-1d75-41c7-8a9f-834ec8bedded" />
 
-i train the model for 3 epochs 
-<img width="612" height="362" alt="image" src="https://github.com/user-attachments/assets/95a1636a-1d75-41c7-8a9f-834ec8bedded" />
-
-than i save the trained Model with its weights: birdclef_resnet18.pth  
-
-purpose to reuse trained model for prediction without retraining. 
+   than i save the trained Model with its weights: birdclef_resnet18.pth  
+   
+   purpose to reuse trained model for prediction without retraining. 
 
