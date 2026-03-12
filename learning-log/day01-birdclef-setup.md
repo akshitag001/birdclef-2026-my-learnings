@@ -22,4 +22,47 @@ mel = librosa.feature.melspectrogram(
     sr=32000,
     n_mels=128
 )
-   
+
+Result shape : 128 x 313 ( meaning 128 frequency bands , 313 time frames )
+
+4. Built a PyTorch Dataset
+
+ i create a custom dataset class purpose was to load data than convert to spectogram than attach label   
+ each training sample contains ( spectogram tensor + special label ) labels were encoded into a 234 length vector. 
+ 
+ what i learned : MULTI LABEL CLASSIFICATION
+
+5. Create a DataLoader
+
+   we used a pytorch dataloader to efficiently feed data to the model , ex batch shape [16,1,128,313] coz , train model faster using batches
+
+6. MAIN PART ( BUILT THE NEURAL NETWORK )
+
+we use ResNet18, a convolutional neural network , coz its fast stable baseline , good for image like data
+
+since spectograms are grayscale , we modified the first layer: 
+input channels : 3 -> 1  ( the final layer outputs will be 234 species probabilities )
+
+7. Defined Loss Function
+
+we use BCEWithLogitsLoss , coz it is a multi label classification problem , one audio can contain 2-3 species voice mix.
+
+8. Train the Model
+
+ spectrogram
+↓
+model prediction
+↓
+compare with true label
+↓
+calculate loss
+↓
+update weights
+
+i train the model for 3 epochs 
+<img width="612" height="362" alt="image" src="https://github.com/user-attachments/assets/95a1636a-1d75-41c7-8a9f-834ec8bedded" />
+
+than i save the trained Model with its weights: birdclef_resnet18.pth  
+
+purpose to reuse trained model for prediction without retraining. 
+
