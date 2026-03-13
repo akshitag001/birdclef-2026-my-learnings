@@ -38,11 +38,14 @@ Think like an AI performance engine that takes trained model and optimizes it so
 
 4.How OpenVINO works step by step
 
-  a. Train model
+   a. Train model
   
-  b. Convert model
+   b. Convert model
   
-  c. Compile model
+   c. Compile model
   
       core.compile_model(model, "CPU")
-  d. Run inference
+   d. Run inference
+  
+<img width="761" height="326" alt="image" src="https://github.com/user-attachments/assets/49ae4eb1-d4dd-41da-ae6f-aeb56dd0f6b0" />
+
